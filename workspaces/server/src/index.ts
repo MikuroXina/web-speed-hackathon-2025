@@ -15,7 +15,6 @@ async function main() {
 
   app.addHook('onSend', async (_req, reply) => {
     reply.headers({
-      'cache-control': 'no-store',
       'x-robots-tag': 'noindex',
     });
   });
