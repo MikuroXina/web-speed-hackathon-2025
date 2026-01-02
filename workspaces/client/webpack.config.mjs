@@ -35,6 +35,11 @@ const config = {
         },
       },
       {
+        include: path.resolve(import.meta.dirname, 'src'),
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
+      },
+      {
         test: /\.png$/,
         type: 'asset/inline',
       },

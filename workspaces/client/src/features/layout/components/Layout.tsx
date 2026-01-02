@@ -71,32 +71,32 @@ export const Layout = ({ children }: Props) => {
         <aside className="sticky top-[0px] flex h-[100vh] flex-col items-center bg-[#171717] pt-[80px] [grid-area:a1/a1/a2/a2]">
           <nav>
             <button
-              className="block flex h-[56px] w-[188px] items-center justify-center bg-transparent pb-[8px] pl-[20px] pr-[8px] pt-[8px]"
+              className="block flex h-[56px] w-[188px] items-center justify-center bg-transparent pt-[8px] pr-[8px] pb-[8px] pl-[20px]"
               type="button"
               onClick={isSignedIn ? authActions.openSignOutDialog : authActions.openSignInDialog}
             >
               <div
-                className={`i-fa-solid:${isSignedIn ? 'sign-out-alt' : 'user'} m-[4px] size-[20px] shrink-0 grow-0`}
+                className={`${isSignedIn ? 'icon-[fa-solid--sign-out-alt]' : 'icon-[fa-solid--user]'} m-[4px] size-[20px] shrink-0 grow-0`}
               />
-              <span className="grow-1 shrink-1 ml-[16px] text-left text-[14px] font-bold">
+              <span className="ml-[16px] shrink-1 grow-1 text-left text-[14px] font-bold">
                 {isSignedIn ? 'ログアウト' : 'ログイン'}
               </span>
             </button>
 
             <Link
-              className="block flex h-[56px] w-[188px] items-center justify-center pb-[8px] pl-[20px] pr-[8px] pt-[8px]"
+              className="block flex h-[56px] w-[188px] items-center justify-center pt-[8px] pr-[8px] pb-[8px] pl-[20px]"
               to="/"
             >
-              <div className="i-bi:house-fill m-[4px] size-[20px] shrink-0 grow-0" />
-              <span className="grow-1 shrink-1 ml-[16px] text-left text-[14px] font-bold">ホーム</span>
+              <div className="icon-[bi--house-fill] m-[4px] size-[20px] shrink-0 grow-0" />
+              <span className="ml-[16px] shrink-1 grow-1 text-left text-[14px] font-bold">ホーム</span>
             </Link>
 
             <Link
-              className="block flex h-[56px] w-[188px] items-center justify-center pb-[8px] pl-[20px] pr-[8px] pt-[8px]"
+              className="block flex h-[56px] w-[188px] items-center justify-center pt-[8px] pr-[8px] pb-[8px] pl-[20px]"
               to="/timetable"
             >
-              <div className="i-fa-solid:calendar m-[4px] size-[20px] shrink-0 grow-0" />
-              <span className="grow-1 shrink-1 ml-[16px] text-left text-[14px] font-bold">番組表</span>
+              <div className="icon-[fa-solid--calendar] m-[4px] size-[20px] shrink-0 grow-0" />
+              <span className="ml-[16px] shrink-1 grow-1 text-left text-[14px] font-bold">番組表</span>
             </Link>
           </nav>
         </aside>

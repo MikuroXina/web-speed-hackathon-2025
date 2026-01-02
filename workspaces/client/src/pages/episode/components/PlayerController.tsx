@@ -31,7 +31,7 @@ export const PlayerController = ({ episode }: Props) => {
           </div>
 
           <Slider.Root
-            className="group relative flex h-[20px] w-full cursor-pointer touch-none select-none flex-row items-center"
+            className="group relative flex h-[20px] w-full cursor-pointer touch-none flex-row items-center select-none"
             max={duration}
             min={0}
             orientation="horizontal"
@@ -41,10 +41,10 @@ export const PlayerController = ({ episode }: Props) => {
               updateCurrentTime(t);
             }}
           >
-            <Slider.Track className="grow-1 relative h-[2px] rounded-[4px] bg-[#999999] group-hover:h-[4px]">
+            <Slider.Track className="relative h-[2px] grow-1 rounded-[4px] bg-[#999999] group-hover:h-[4px]">
               <Slider.Range className="absolute h-[2px] rounded-[4px] bg-[#1c43d1] group-hover:h-[4px]" />
             </Slider.Track>
-            <Slider.Thumb className="block size-[20px] rounded-[10px] bg-[#1c43d1] opacity-0 focus:outline-none group-hover:opacity-100" />
+            <Slider.Thumb className="block size-[20px] rounded-[10px] bg-[#1c43d1] opacity-0 group-hover:opacity-100 focus:outline-none" />
           </Slider.Root>
         </div>
 
@@ -60,7 +60,7 @@ export const PlayerController = ({ episode }: Props) => {
                 }}
               >
                 <span
-                  className={`i-material-symbols:${playing ? 'pause-rounded' : 'play-arrow-rounded'} m-[14px] block size-[20px] shrink-0 grow-0 text-[#FFFFFF]`}
+                  className={`${playing ? 'icon-[material-symbols--pause-rounded]' : 'icon-[material-symbols--play-arrow-rounded]'} m-[14px] block size-[20px] shrink-0 grow-0 text-[#FFFFFF]`}
                 />
               </button>
 
@@ -79,7 +79,7 @@ export const PlayerController = ({ episode }: Props) => {
               type="button"
             >
               <span
-                className={`i-material-symbols:${muted ? 'volume-off-rounded' : 'volume-up-rounded'} m-[14px] block size-[20px] shrink-0 grow-0 text-[#FFFFFF]`}
+                className={`${muted ? 'icon-[material-symbols--volume-off-rounded]' : 'icon-[material-symbols--volume-up-rounded]'} m-[14px] block size-[20px] shrink-0 grow-0 text-[#FFFFFF]`}
                 onClick={() => {
                   toggleMuted();
                 }}
