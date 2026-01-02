@@ -18,7 +18,15 @@ export const SeriesItem = ({ series }: Props) => {
           <>
             <div className="relative overflow-hidden rounded-[8px] border-[2px] border-solid border-[#FFFFFF1F]">
               <Flipped stagger flipId={isTransitioning ? `series-${series.id}` : 0}>
-                <img alt="" className="h-auto w-full" src={series.thumbnailUrl} />
+                <img
+                  alt=""
+                  className="h-auto w-full"
+                  decoding="async"
+                  height={3456}
+                  loading="lazy"
+                  src={series.thumbnailUrl}
+                  width={6144}
+                />
               </Flipped>
             </div>
             <div className="p-[8px]">

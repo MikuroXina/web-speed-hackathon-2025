@@ -37,10 +37,14 @@ export const SeriesPage = () => {
             <img
               alt=""
               className="h-auto w-[400px] shrink-0 grow-0 rounded-[8px] border-[2px] border-solid border-[#FFFFFF1F]"
+              decoding="async"
+              height={3456}
+              loading="lazy"
               src={series.thumbnailUrl}
+              width={6144}
             />
           </Flipped>
-          <div className="grow-1 shrink-1 overflow-hidden">
+          <div className="shrink-1 grow-1 overflow-hidden">
             <h1 className="mb-[16px] text-[32px] font-bold text-[#ffffff]">
               <Ellipsis ellipsis reflowOnResize maxLine={2} text={series.title} visibleLine={2} />
             </h1>
