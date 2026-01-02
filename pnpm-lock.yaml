@@ -220,6 +220,9 @@ importers:
       hls.js:
         specifier: 1.5.17
         version: 1.5.17
+      mini-css-extract-plugin:
+        specifier: 2.9.4
+        version: 2.9.4(webpack@5.96.1)
       postcss:
         specifier: 8.5.6
         version: 8.5.6
@@ -229,9 +232,6 @@ importers:
       shaka-player:
         specifier: 4.12.5
         version: 4.12.5(patch_hash=ztcamgtqc3a62la4l6p3d6w4ae)
-      style-loader:
-        specifier: 4.0.0
-        version: 4.0.0(webpack@5.96.1)
       tailwindcss:
         specifier: 4.1.18
         version: 4.1.18
@@ -4393,6 +4393,12 @@ packages:
   min-document@2.19.0:
     resolution: {integrity: sha512-9Wy1B3m3f66bPPmU5hdA4DR4PB2OfDU/+GS3yAB7IQozE3tqXaVv2zOjgla7MEGSRv95+ILmOuvhLkOK6wJtCQ==}
 
+  mini-css-extract-plugin@2.9.4:
+    resolution: {integrity: sha512-ZWYT7ln73Hptxqxk2DxPU9MmapXRhxkJD6tkSR04dnQxm8BGu2hzgKLugK5yySD97u/8yy7Ma7E76k9ZdvtjkQ==}
+    engines: {node: '>= 12.13.0'}
+    peerDependencies:
+      webpack: ^5.0.0
+
   minimalistic-assert@1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==}
 
@@ -5412,12 +5418,6 @@ packages:
   strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
-
-  style-loader@4.0.0:
-    resolution: {integrity: sha512-1V4WqhhZZgjVAVJyt7TdDPZoPBPNHbekX4fWnCJL1yQukhCeZhJySUL+gL9y6sNdN95uEOS83Y55SqHcP7MzLA==}
-    engines: {node: '>= 18.12.0'}
-    peerDependencies:
-      webpack: ^5.27.0
 
   stylis@4.3.6:
     resolution: {integrity: sha512-yQ3rwFWRfwNUY7H5vpU0wfdkNSnvnJinhF9830Swlaxl03zsOjCfmX0ugac+3LtK0lYSgwL/KXc8oYL3mG4YFQ==}
@@ -9986,6 +9986,12 @@ snapshots:
     dependencies:
       dom-walk: 0.1.2
 
+  mini-css-extract-plugin@2.9.4(webpack@5.96.1):
+    dependencies:
+      schema-utils: 4.2.0
+      tapable: 2.2.1
+      webpack: 5.96.1(webpack-cli@5.1.4)
+
   minimalistic-assert@1.0.1: {}
 
   minimatch@10.0.1:
@@ -11039,10 +11045,6 @@ snapshots:
   strip-bom@3.0.0: {}
 
   strip-json-comments@3.1.1: {}
-
-  style-loader@4.0.0(webpack@5.96.1):
-    dependencies:
-      webpack: 5.96.1(webpack-cli@5.1.4)
 
   stylis@4.3.6: {}
 

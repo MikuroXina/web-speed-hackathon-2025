@@ -1,5 +1,6 @@
 import path from 'node:path';
 
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import webpack from 'webpack';
 
 /** @type {import('webpack').Configuration} */
@@ -37,7 +38,7 @@ const config = {
       {
         include: path.resolve(import.meta.dirname, 'src'),
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: [MiniCssExtractPlugin.loader, { loader: 'css-loader', options: { importLoaders: 1 } }, 'postcss-loader'],
       },
       {
         test: /\.png$/,
@@ -63,10 +64,7 @@ const config = {
     path: path.resolve(import.meta.dirname, './dist'),
     publicPath: 'auto',
   },
-  plugins: [
-    new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
-    new webpack.EnvironmentPlugin({ API_BASE_URL: '/api', NODE_ENV: '' }),
-  ],
+  plugins: [new MiniCssExtractPlugin(), new webpack.EnvironmentPlugin({ API_BASE_URL: '/api', NODE_ENV: '' })],
   resolve: {
     alias: {
       '@ffmpeg/core$': path.resolve(import.meta.dirname, 'node_modules', '@ffmpeg/core/dist/umd/ffmpeg-core.js'),
