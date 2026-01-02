@@ -38,31 +38,29 @@ export function registerSsr(app: FastifyInstance): void {
     }
 
     const router = createStaticRouter(handler.dataRoutes, context);
-    renderToString(
-      <StrictMode>
-        <StoreProvider createStore={() => store}>
-          <StaticRouterProvider context={context} hydrate={false} router={router} />
-        </StoreProvider>
-      </StrictMode>,
-    );
-
-    return reply.type('text/html').send(/* html */ `
-      <!DOCTYPE html>
+    const rendered = renderToString(
       <html lang="ja">
         <head>
           <meta charSet="UTF-8" />
           <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-          <meta name="robots" content="noindex" />
-          <script src="/public/main.js"></script>
         </head>
-        <body></body>
-      </html>
-      <script>
+        <body>
+          <StrictMode>
+            <StoreProvider createStore={() => store}>
+              <StaticRouterProvider context={context} router={router} />
+            </StoreProvider>
+          </StrictMode>
+          <script async defer src="/public/main.js"></script>
+        </body>
+        <script>{`
         window.__staticRouterHydrationData = ${htmlescape({
           actionData: context.actionData,
           loaderData: context.loaderData,
         })};
-      </script>
-    `);
+      `}</script>
+      </html>,
+    );
+
+    return reply.type('text/html').send(`<!DOCTYPE html>${rendered}`);
   });
 }

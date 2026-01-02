@@ -28,5 +28,4 @@ function main() {
     </StrictMode>,
   );
 }
-
-document.addEventListener('DOMContentLoaded', main);
+main();
