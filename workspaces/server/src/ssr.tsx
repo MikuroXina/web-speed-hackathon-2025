@@ -44,6 +44,13 @@ export function registerSsr(app: FastifyInstance): void {
           <meta charSet="UTF-8" />
           <meta content="width=device-width, initial-scale=1.0" name="viewport" />
           <link href="/public/main.css" rel="stylesheet" />
+          <script>{`
+            window.__zustandHydrationData = ${htmlescape(store.getState())};
+            window.__staticRouterHydrationData = ${htmlescape({
+              actionData: context.actionData,
+              loaderData: context.loaderData,
+            })};
+          `}</script>
         </head>
         <body>
           <StrictMode>
@@ -53,12 +60,6 @@ export function registerSsr(app: FastifyInstance): void {
           </StrictMode>
           <script async defer src="/public/main.js"></script>
         </body>
-        <script>{`
-        window.__staticRouterHydrationData = ${htmlescape({
-          actionData: context.actionData,
-          loaderData: context.loaderData,
-        })};
-      `}</script>
       </html>,
     );
 
