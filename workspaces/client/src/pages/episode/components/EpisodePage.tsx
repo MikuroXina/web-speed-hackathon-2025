@@ -32,7 +32,6 @@ export const EpisodePage = () => {
   invariant(episodeId);
 
   const { episode, modules } = useLoaderData<typeof prefetch>();
-  console.dir({ episode });
   invariant(episode);
 
   const playerRef = usePlayerRef();
