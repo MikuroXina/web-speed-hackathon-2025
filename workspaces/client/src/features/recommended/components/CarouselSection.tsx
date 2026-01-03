@@ -1,13 +1,30 @@
 import { ElementScrollRestoration } from '@epic-web/restore-scroll';
-import { StandardSchemaV1 } from '@standard-schema/spec';
-import * as schema from '@wsh-2025/schema/src/api/schema';
-import { ArrayValues } from 'type-fest';
 
 import { EpisodeItem } from '@wsh-2025/client/src/features/recommended/components/EpisodeItem';
 import { SeriesItem } from '@wsh-2025/client/src/features/recommended/components/SeriesItem';
 
 interface Props {
-  module: ArrayValues<StandardSchemaV1.InferOutput<typeof schema.getRecommendedModulesResponse>>;
+  module: {
+    id: string;
+    items: {
+      episode?: {
+        id: string;
+        premium: boolean;
+        series: {
+          title: string;
+        };
+        thumbnailUrl: string;
+        title: string;
+      };
+      id: string;
+      series?: {
+        id: string;
+        thumbnailUrl: string;
+        title: string;
+      };
+    }[];
+    title: string;
+  };
 }
 
 export const CarouselSection = ({ module }: Props) => {

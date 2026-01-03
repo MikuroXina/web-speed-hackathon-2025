@@ -1,17 +1,22 @@
-import { StandardSchemaV1 } from '@standard-schema/spec';
-import * as schema from '@wsh-2025/schema/src/api/schema';
 import { useRef } from 'react';
 import { Flipped } from 'react-flip-toolkit';
 import { NavLink } from 'react-router';
 import invariant from 'tiny-invariant';
-import { ArrayValues } from 'type-fest';
 
 import { Player } from '../../player/components/Player';
 import { PlayerType } from '../../player/constants/player_type';
 import { PlayerWrapper } from '../../player/interfaces/player_wrapper';
 
 interface Props {
-  module: ArrayValues<StandardSchemaV1.InferOutput<typeof schema.getRecommendedModulesResponse>>;
+  module: {
+    items: {
+      episode: {
+        description: string;
+        id: string;
+        title: string;
+      };
+    }[];
+  };
 }
 
 export const JumbotronSection = ({ module }: Props) => {
