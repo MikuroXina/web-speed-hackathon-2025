@@ -25,8 +25,8 @@ export const EpisodeItem = ({ episode }: Props) => {
                   alt=""
                   className="h-auto w-full"
                   decoding="async"
+                  fetchPriority="high"
                   height={3456}
-                  loading="lazy"
                   src={episode.thumbnailUrl}
                   width={6144}
                 />
