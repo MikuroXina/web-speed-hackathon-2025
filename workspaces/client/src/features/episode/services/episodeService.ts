@@ -47,8 +47,8 @@ interface EpisodeService {
 
 export const episodeService: EpisodeService = {
   async fetchEpisodeById({ episodeId }) {
-    const channel = await batcher.fetch({ episodeId });
-    return channel;
+    const episode = await batcher.fetch({ episodeId });
+    return episode;
   },
   async fetchEpisodes() {
     const data = await $fetch('/episodes', { query: {} });
