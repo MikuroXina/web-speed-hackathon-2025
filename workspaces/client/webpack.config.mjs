@@ -5,7 +5,7 @@ import webpack from 'webpack';
 
 /** @type {import('webpack').Configuration} */
 const config = {
-  devtool: 'source-map',
+  devtool: 'eval',
   entry: './src/main.tsx',
   mode: 'none',
   module: {
