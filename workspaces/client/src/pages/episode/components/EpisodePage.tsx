@@ -1,18 +1,16 @@
 import { Suspense } from 'react';
 import Ellipsis from 'react-ellipsis-component';
 import { Flipped } from 'react-flip-toolkit';
-import { Params, useParams } from 'react-router';
+import { Params, useLoaderData, useParams } from 'react-router';
 import invariant from 'tiny-invariant';
 
 import { createStore } from '@wsh-2025/client/src/app/createStore';
 import { useAuthActions } from '@wsh-2025/client/src/features/auth/hooks/useAuthActions';
 import { useAuthUser } from '@wsh-2025/client/src/features/auth/hooks/useAuthUser';
-import { useEpisodeById } from '@wsh-2025/client/src/features/episode/hooks/useEpisodeById';
 import { AspectRatio } from '@wsh-2025/client/src/features/layout/components/AspectRatio';
 import { Player } from '@wsh-2025/client/src/features/player/components/Player';
 import { PlayerType } from '@wsh-2025/client/src/features/player/constants/player_type';
 import { RecommendedSection } from '@wsh-2025/client/src/features/recommended/components/RecommendedSection';
-import { useRecommended } from '@wsh-2025/client/src/features/recommended/hooks/useRecommended';
 import { SeriesEpisodeList } from '@wsh-2025/client/src/features/series/components/SeriesEpisodeList';
 import { PlayerController } from '@wsh-2025/client/src/pages/episode/components/PlayerController';
 import { usePlayerRef } from '@wsh-2025/client/src/pages/episode/hooks/usePlayerRef';
@@ -33,10 +31,9 @@ export const EpisodePage = () => {
   const { episodeId } = useParams();
   invariant(episodeId);
 
-  const episode = useEpisodeById({ episodeId });
+  const { episode, modules } = useLoaderData<typeof prefetch>();
+  console.dir({ episode });
   invariant(episode);
-
-  const modules = useRecommended({ referenceId: episodeId });
 
   const playerRef = usePlayerRef();
 

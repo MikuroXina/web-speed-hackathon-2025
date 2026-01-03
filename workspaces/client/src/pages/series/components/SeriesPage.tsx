@@ -1,13 +1,11 @@
 import Ellipsis from 'react-ellipsis-component';
 import { Flipped } from 'react-flip-toolkit';
-import { Params, useParams } from 'react-router';
+import { Params, useLoaderData, useParams } from 'react-router';
 import invariant from 'tiny-invariant';
 
 import { createStore } from '@wsh-2025/client/src/app/createStore';
 import { RecommendedSection } from '@wsh-2025/client/src/features/recommended/components/RecommendedSection';
-import { useRecommended } from '@wsh-2025/client/src/features/recommended/hooks/useRecommended';
 import { SeriesEpisodeList } from '@wsh-2025/client/src/features/series/components/SeriesEpisodeList';
-import { useSeriesById } from '@wsh-2025/client/src/features/series/hooks/useSeriesById';
 
 export const prefetch = async (store: ReturnType<typeof createStore>, { seriesId }: Params) => {
   invariant(seriesId);
@@ -22,10 +20,8 @@ export const SeriesPage = () => {
   const { seriesId } = useParams();
   invariant(seriesId);
 
-  const series = useSeriesById({ seriesId });
+  const { modules, series } = useLoaderData<typeof prefetch>();
   invariant(series);
-
-  const modules = useRecommended({ referenceId: seriesId });
 
   return (
     <>
