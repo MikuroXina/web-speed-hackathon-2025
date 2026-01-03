@@ -4,7 +4,6 @@ import { useRef } from 'react';
 
 import { usePointer } from '@wsh-2025/client/src/features/layout/hooks/usePointer';
 import { useDuration } from '@wsh-2025/client/src/pages/episode/hooks/useDuration';
-import { useSeekThumbnail } from '@wsh-2025/client/src/pages/episode/hooks/useSeekThumbnail';
 
 const SEEK_THUMBNAIL_WIDTH = 160;
 
@@ -14,14 +13,14 @@ interface Props {
 
 export const SeekThumbnail = ({ episode }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
-  const seekThumbnail = useSeekThumbnail({ episode });
+  const seekThumbnail = `/streams/${episode.streamId}/preview.jpg`;
   const pointer = usePointer();
   const duration = useDuration();
 
   const elementRect = ref.current?.parentElement?.getBoundingClientRect() ?? { left: 0, width: 0 };
   const relativeX = pointer.x - elementRect.left;
 
-  const percentage = Math.max(0, Math.min(relativeX / elementRect.width, 1));
+  const percentage = Math.max(0, Math.min((relativeX + Number.EPSILON) / elementRect.width, 1));
   const pointedTime = duration * percentage;
 
   // サムネイルが画面からはみ出ないようにサムネイル中央を基準として left を計算する
