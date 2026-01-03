@@ -8,7 +8,8 @@
     "format:eslint": "wireit",
     "format:prettier": "wireit",
     "heroku-start": "wireit",
-    "start": "wireit"
+    "start": "wireit",
+    "watch": "wireit"
   },
   "dependencies": {
     "@fastify/compress": "8.3.1",
@@ -64,6 +65,25 @@
     },
     "database:reset": {
       "command": "tsx ./tools/seed.ts"
+    },
+    "watch": {
+      "command": "tsx watch --include '../client/src/*' ./src/index.ts -r ./loaders/png.cjs",
+      "service": true,
+      "env": {
+        "API_BASE_URL": {
+          "external": true,
+          "default": "http://localhost:8000/api"
+        },
+        "PORT": {
+          "external": true,
+          "default": "8000"
+        }
+      },
+      "files": [
+        "../../pnpm-lock.yaml",
+        "../schema/src/**/*",
+        "./src/**/*"
+      ]
     },
     "start": {
       "command": "tsx -r ./loaders/png.cjs ./src/index.ts",

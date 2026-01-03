@@ -5,7 +5,8 @@
     "build": "wireit",
     "format": "wireit",
     "format:eslint": "wireit",
-    "format:prettier": "wireit"
+    "format:prettier": "wireit",
+    "watch": "wireit"
   },
   "dependencies": {
     "@babel/runtime": "7.26.10",
@@ -88,6 +89,16 @@
     "wireit": "0.14.9"
   },
   "wireit": {
+    "watch": {
+      "command": "webpack --watch",
+      "files": [
+        "../../pnpm-lock.yaml",
+        "../schema/src/**/*",
+        "./src/**/*",
+        "./webpack.config.mjs"
+      ],
+      "service": true
+    },
     "build": {
       "command": "webpack",
       "files": [
