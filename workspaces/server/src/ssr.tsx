@@ -8,8 +8,9 @@ import { createStore } from '@wsh-2025/client/src/app/createStore';
 import type { FastifyInstance } from 'fastify';
 import { createStandardRequest } from 'fastify-standard-request-reply';
 import htmlescape from 'htmlescape';
+import { Minipass } from 'minipass';
 import { StrictMode } from 'react';
-import { renderToString } from 'react-dom/server';
+import { renderToPipeableStream } from 'react-dom/server';
 import { createStaticHandler, createStaticRouter, StaticRouterProvider } from 'react-router';
 
 export function registerSsr(app: FastifyInstance): void {
@@ -38,31 +39,48 @@ export function registerSsr(app: FastifyInstance): void {
     }
 
     const router = createStaticRouter(handler.dataRoutes, context);
-    const rendered = renderToString(
-      <html lang="ja">
-        <head>
-          <meta charSet="UTF-8" />
-          <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-          <link href="/public/main.css" rel="stylesheet" />
-          <script>{`
-            window.__zustandHydrationData = ${htmlescape(store.getState())};
-            window.__staticRouterHydrationData = ${htmlescape({
-              actionData: context.actionData,
-              loaderData: context.loaderData,
-            })};
-          `}</script>
-        </head>
-        <body>
-          <StrictMode>
-            <StoreProvider createStore={() => store}>
-              <StaticRouterProvider context={context} router={router} />
-            </StoreProvider>
-          </StrictMode>
-          <script async defer src="/public/main.js"></script>
-        </body>
-      </html>,
-    );
 
-    return reply.type('text/html').send(`<!DOCTYPE html>${rendered}`);
+    const stream = await new Promise<Minipass>((resolve, reject) => {
+      const duplex = new Minipass();
+      const pipeable = renderToPipeableStream(
+        <html lang="ja">
+          <head>
+            <meta charSet="UTF-8" />
+            <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+            <link href="/public/main.css" rel="stylesheet" />
+            <script>{`
+              window.__zustandHydrationData = ${htmlescape(store.getState())};
+              window.__staticRouterHydrationData = ${htmlescape({
+                actionData: context.actionData,
+                loaderData: context.loaderData,
+              })};
+            `}</script>
+          </head>
+          <body>
+            <StrictMode>
+              <StoreProvider createStore={() => store}>
+                <StaticRouterProvider context={context} router={router} />
+              </StoreProvider>
+            </StrictMode>
+          </body>
+        </html>,
+        {
+          bootstrapScripts: ['/public/main.js'],
+          onShellError(error) {
+            clearTimeout(abortTimer);
+            reject(new Error('renderToPipeableStream occurred shell error', { cause: error }));
+          },
+          onShellReady() {
+            clearTimeout(abortTimer);
+            resolve(pipeable.pipe(duplex));
+          },
+        },
+      );
+      const abortTimer = setTimeout(() => {
+        pipeable.abort();
+        reject(new Error('renderToPipeableStream aborted by timeout'));
+      }, 10 * 1000);
+    });
+    return reply.type('text/html').send(stream);
   });
 }

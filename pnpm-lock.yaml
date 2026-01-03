@@ -411,6 +411,9 @@ importers:
       luxon:
         specifier: 3.5.0
         version: 3.5.0
+      minipass:
+        specifier: 7.1.2
+        version: 7.1.2
       react:
         specifier: 19.0.0
         version: 19.0.0

@@ -32,6 +32,7 @@
     "fastify-zod-openapi": "4.0.0",
     "htmlescape": "1.1.1",
     "luxon": "3.5.0",
+    "minipass": "7.1.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-router": "7.0.2",
