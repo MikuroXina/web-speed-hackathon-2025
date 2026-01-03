@@ -164,7 +164,7 @@ export const recommendedItem = table(
     seriesId: t.text().references(() => series.id),
     episodeId: t.text().references(() => episode.id),
   },
-  () => [],
+  (recommendedItem) => [t.index('moduleIdOrderIndex').on(recommendedItem.moduleId, recommendedItem.order)],
 );
 export const recommendedItemRelation = relations(recommendedItem, ({ one }) => ({
   module: one(recommendedModule, {
@@ -190,7 +190,7 @@ export const recommendedModule = table(
     referenceId: t.text().notNull(),
     type: t.text().notNull(),
   },
-  () => [],
+  (recommendedModule) => [t.index('referenceIdOrderIndex').on(recommendedModule.referenceId, recommendedModule.order)],
 );
 export const recommendedModuleRelation = relations(recommendedModule, ({ many }) => ({
   items: many(recommendedItem),
