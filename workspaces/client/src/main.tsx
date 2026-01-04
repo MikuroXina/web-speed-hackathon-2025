@@ -33,4 +33,9 @@ function main() {
     </StrictMode>,
   );
 }
-document.addEventListener('DOMContentLoaded', main);
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', main);
+} else {
+  main();
+}
