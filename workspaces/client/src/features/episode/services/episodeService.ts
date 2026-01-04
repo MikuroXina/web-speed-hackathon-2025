@@ -36,7 +36,7 @@ const batcher = batshit.create({
     }
     return item;
   },
-  scheduler: batshit.maxBatchSizeScheduler({ maxBatchSize: 250 }),
+  scheduler: batshit.windowedFiniteBatchScheduler({ maxBatchSize: 250, windowMs: 10 }),
 });
 
 interface EpisodeService {
