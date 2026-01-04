@@ -32,7 +32,6 @@ video {
 ::before,
 ::backdrop,
 ::file-selector-button {
-  color: currentcolor;
   border-style: none;
   text-decoration-line: none;
 }
