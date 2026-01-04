@@ -17,7 +17,7 @@ export const prefetch = async (store: ReturnType<typeof createStore>, { episodeI
   invariant(episodeId);
   const episode = await store.getState().features.episode.fetchEpisodeById({ episodeId });
   if (episode == null) {
-    throw redirect('/404');
+    throw redirect('/404', { status: 404 });
   }
   const modules = await store
     .getState()
