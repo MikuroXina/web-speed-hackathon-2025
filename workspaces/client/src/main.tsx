@@ -33,4 +33,4 @@ function main() {
     </StrictMode>,
   );
 }
-main();
+document.addEventListener('DOMContentLoaded', main);
