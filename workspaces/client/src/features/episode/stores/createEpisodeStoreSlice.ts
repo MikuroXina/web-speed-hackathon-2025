@@ -14,7 +14,7 @@ interface EpisodeState {
 interface EpisodeActions {
   fetchEpisodeById: (params: {
     episodeId: EpisodeId;
-  }) => Promise<StandardSchemaV1.InferOutput<typeof schema.getEpisodeByIdResponse>>;
+  }) => Promise<StandardSchemaV1.InferOutput<typeof schema.getEpisodeByIdResponse> | null>;
   fetchEpisodes: () => Promise<StandardSchemaV1.InferOutput<typeof schema.getEpisodesResponse>>;
 }
 
@@ -23,11 +23,13 @@ export const createEpisodeStoreSlice = () => {
     episodes: {},
     fetchEpisodeById: async ({ episodeId }) => {
       const episode = await episodeService.fetchEpisodeById({ episodeId });
-      set((state) => {
-        return produce(state, (draft) => {
-          draft.episodes[episode.id] = episode;
+      if (episode != null) {
+        set((state) => {
+          return produce(state, (draft) => {
+            draft.episodes[episode.id] = episode;
+          });
         });
-      });
+      }
       return episode;
     },
     fetchEpisodes: async () => {

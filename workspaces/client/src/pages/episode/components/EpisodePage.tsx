@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Flipped } from 'react-flip-toolkit';
-import { Params, useLoaderData, useParams } from 'react-router';
+import { Params, redirect, useLoaderData, useParams } from 'react-router';
 import invariant from 'tiny-invariant';
 
 import { createStore } from '@wsh-2025/client/src/app/createStore';
@@ -16,6 +16,9 @@ import { usePlayerRef } from '@wsh-2025/client/src/pages/episode/hooks/usePlayer
 export const prefetch = async (store: ReturnType<typeof createStore>, { episodeId }: Params) => {
   invariant(episodeId);
   const episode = await store.getState().features.episode.fetchEpisodeById({ episodeId });
+  if (episode == null) {
+    throw redirect('/404');
+  }
   const modules = await store
     .getState()
     .features.recommended.fetchRecommendedModulesByReferenceId({ referenceId: episodeId });

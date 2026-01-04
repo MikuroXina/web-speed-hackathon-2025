@@ -31,10 +31,7 @@ const batcher = batshit.create({
   },
   resolver(items, query: { episodeId: string }) {
     const item = items.find((item) => item.id === query.episodeId);
-    if (item == null) {
-      throw new Error('Episode is not found.');
-    }
-    return item;
+    return item ?? null;
   },
   scheduler: batshit.windowedFiniteBatchScheduler({ maxBatchSize: 250, windowMs: 10 }),
 });
@@ -42,7 +39,7 @@ const batcher = batshit.create({
 interface EpisodeService {
   fetchEpisodeById: (query: {
     episodeId: string;
-  }) => Promise<StandardSchemaV1.InferOutput<typeof schema.getEpisodeByIdResponse>>;
+  }) => Promise<StandardSchemaV1.InferOutput<typeof schema.getEpisodeByIdResponse> | null>;
   fetchEpisodes: () => Promise<StandardSchemaV1.InferOutput<typeof schema.getEpisodesResponse>>;
 }
 
