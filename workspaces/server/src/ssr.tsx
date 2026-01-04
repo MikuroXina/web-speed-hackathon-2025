@@ -7,7 +7,6 @@ import { createRoutes } from '@wsh-2025/client/src/app/createRoutes';
 import { createStore } from '@wsh-2025/client/src/app/createStore';
 import type { FastifyInstance } from 'fastify';
 import { createStandardRequest } from 'fastify-standard-request-reply';
-import htmlescape from 'htmlescape';
 import { Minipass } from 'minipass';
 import { StrictMode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
@@ -48,13 +47,6 @@ export function registerSsr(app: FastifyInstance): void {
             <meta charSet="UTF-8" />
             <meta content="width=device-width, initial-scale=1.0" name="viewport" />
             <link href="/public/main.css" rel="stylesheet" />
-            <script>{`
-              window.__zustandHydrationData = ${htmlescape(store.getState())};
-              window.__staticRouterHydrationData = ${htmlescape({
-                actionData: context.actionData,
-                loaderData: context.loaderData,
-              })};
-            `}</script>
           </head>
           <body>
             <StrictMode>
