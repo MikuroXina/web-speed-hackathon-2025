@@ -6,6 +6,7 @@
     "format": "wireit",
     "format:eslint": "wireit",
     "format:prettier": "wireit",
+    "typecheck": "wireit",
     "watch": "wireit"
   },
   "dependencies": {
@@ -109,6 +110,9 @@
     },
     "format:prettier": {
       "command": "prettier --write ."
+    },
+    "typecheck": {
+      "command": "tsc --noEmit"
     }
   }
 }
