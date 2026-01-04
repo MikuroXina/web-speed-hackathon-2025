@@ -14,6 +14,19 @@ interface SignInFormValues {
   password: string;
 }
 
+function validate(values: SignInFormValues) {
+  const schema = z.object({
+    email: z
+      .string({ required_error: 'メールアドレスを入力してください' })
+      .and(z.custom(isValidEmail, { message: 'メールアドレスが正しくありません' })),
+    password: z
+      .string({ required_error: 'パスワードを入力してください' })
+      .and(z.custom(isValidPassword, { message: 'パスワードが正しくありません' })),
+  });
+  const result = schema.safeParse(values);
+  return result.success ? undefined : result.error.formErrors.fieldErrors;
+}
+
 interface Props {
   isOpen: boolean;
   onClose: () => void;
@@ -52,21 +65,7 @@ export const SignInDialog = ({ isOpen, onClose, onOpenSignUp }: Props) => {
 
         <h2 className="mb-[24px] text-center text-[24px] font-bold">ログイン</h2>
 
-        <Form
-          validate={(values) => {
-            const schema = z.object({
-              email: z
-                .string({ required_error: 'メールアドレスを入力してください' })
-                .and(z.custom(isValidEmail, { message: 'メールアドレスが正しくありません' })),
-              password: z
-                .string({ required_error: 'パスワードを入力してください' })
-                .and(z.custom(isValidPassword, { message: 'パスワードが正しくありません' })),
-            });
-            const result = schema.safeParse(values);
-            return result.success ? undefined : result.error.formErrors.fieldErrors;
-          }}
-          onSubmit={onSubmit}
-        >
+        <Form validate={validate} onSubmit={onSubmit}>
           {({ handleSubmit, hasValidationErrors, submitError, submitting }) => (
             <form className="mb-[16px]" onSubmit={(ev) => void handleSubmit(ev)}>
               <Field name="email">
