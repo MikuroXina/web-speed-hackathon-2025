@@ -1,7 +1,7 @@
 import { lens } from '@dhmk/zustand-lens';
-import { RefCallback } from 'react';
+import type { RefCallback } from 'react';
 
-import { PlayerWrapper } from '@wsh-2025/client/src/features/player/interfaces/player_wrapper';
+import type { PlayerWrapper } from '@wsh-2025/client/src/features/player/interfaces/player_wrapper';
 
 interface EpisodePageState {
   abortController: AbortController | null;

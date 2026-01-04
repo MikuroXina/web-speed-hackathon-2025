@@ -1,5 +1,5 @@
 import { Flipped } from 'react-flip-toolkit';
-import { Params, useLoaderData, useParams } from 'react-router';
+import { type Params, useLoaderData, useParams } from 'react-router';
 import invariant from 'tiny-invariant';
 
 import { createStore } from '@wsh-2025/client/src/app/createStore';

@@ -4,7 +4,7 @@ import shaka from 'shaka-player';
 import videojs from 'video.js';
 
 import { PlayerType } from '@wsh-2025/client/src/features/player/constants/player_type';
-import { PlayerWrapper } from '@wsh-2025/client/src/features/player/interfaces/player_wrapper';
+import type { PlayerWrapper } from '@wsh-2025/client/src/features/player/interfaces/player_wrapper';
 
 class ShakaPlayerWrapper implements PlayerWrapper {
   readonly videoElement = Object.assign(document.createElement('video'), {

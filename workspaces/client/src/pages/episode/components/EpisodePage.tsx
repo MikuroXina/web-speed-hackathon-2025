@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { Flipped } from 'react-flip-toolkit';
-import { Params, redirect, useLoaderData, useParams } from 'react-router';
+import { type Params, redirect, useLoaderData, useParams } from 'react-router';
 import invariant from 'tiny-invariant';
 
 import { createStore } from '@wsh-2025/client/src/app/createStore';

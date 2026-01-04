@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon';
-import { ArrayValues } from 'type-fest';
+import type { ArrayValues } from 'type-fest';
 
 import { useStore } from '@wsh-2025/client/src/app/StoreContext';
 

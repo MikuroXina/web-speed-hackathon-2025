@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import { useEffect, useRef } from 'react';
 import { Flipped } from 'react-flip-toolkit';
-import { Link, Params, useLoaderData, useNavigate, useParams } from 'react-router';
+import { Link, type Params, useLoaderData, useNavigate, useParams } from 'react-router';
 import { useUpdate } from 'react-use';
 import invariant from 'tiny-invariant';
 

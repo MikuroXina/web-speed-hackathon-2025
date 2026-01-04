@@ -1,5 +1,5 @@
 import { createFetch, createSchema } from '@better-fetch/fetch';
-import { StandardSchemaV1 } from '@standard-schema/spec';
+import type { StandardSchemaV1 } from '@standard-schema/spec';
 import * as schema from '@wsh-2025/schema/src/api/schema';
 import * as batshit from '@yornaath/batshit';
 

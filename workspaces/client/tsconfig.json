@@ -7,7 +7,8 @@
       "@wsh-2025/client/*": ["./*"]
     },
     "skipLibCheck": true,
-    "target": "ESNext"
+    "target": "ESNext",
+    "verbatimModuleSyntax": true
   },
   "exclude": ["dist"],
   "extends": "@wsh-2025/configs/tsconfig.json",
