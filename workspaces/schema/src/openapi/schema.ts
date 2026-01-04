@@ -179,31 +179,11 @@ export const getRecommendedModulesRequestParams = z.object({
   referenceId: z.string(),
 });
 export const getRecommendedModulesResponse = z.array(
-  z.object({
-    id: z.string(),
-    title: z.string(),
+  recommendedModule.extend({
     items: z.array(
-      z.object({
-        id: z.string(),
-        episode: z
-          .object({
-            id: z.string(),
-            title: z.string(),
-            description: z.string(),
-            premium: z.boolean(),
-            thumbnailUrl: z.string(),
-            series: z.object({
-              title: z.string(),
-            }),
-          })
-          .nullable(),
-        series: z
-          .object({
-            id: z.string(),
-            title: z.string(),
-            thumbnailUrl: z.string(),
-          })
-          .nullable(),
+      recommendedItem.extend({
+        series: series.nullable(),
+        episode: episode.extend({ series }).nullable(),
       }),
     ),
   }),
