@@ -10,11 +10,15 @@ const $fetch = createFetch({
   schema: createSchema({
     '/signIn': {
       input: schema.signInRequestBody,
+      method: 'post',
       output: schema.signInResponse,
     },
-    '/signOut': {},
+    '/signOut': {
+      method: 'post',
+    },
     '/signUp': {
       input: schema.signUpRequestBody,
+      method: 'post',
       output: schema.signUpResponse,
     },
     '/users/me': {
