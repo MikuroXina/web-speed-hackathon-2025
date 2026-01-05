@@ -18,7 +18,7 @@ export const CarouselSection = ({ module }: Props) => {
         <div
           key={module.id}
           className={
-            'relative mx-[-24px] grid grid-cols-[repeat(auto-fill,_minmax(276px,_1fr))] gap-x-[12px] overflow-x-auto overflow-y-hidden pr-[56px] pl-[24px]'
+            'relative mx-[-24px] grid auto-cols-[minmax(276px,1fr)] grid-flow-col gap-x-[12px] overflow-x-auto overflow-y-hidden pr-[56px] pl-[24px]'
           }
           data-scroll-restore={`carousel-${module.id}`}
         >
