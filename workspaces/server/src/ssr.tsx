@@ -44,7 +44,7 @@ export function registerSsr(app: FastifyInstance): void {
       const pipeable = renderToPipeableStream(
         <html lang="ja">
           <head>
-            <link href="/public/main.css" rel="stylesheet" />
+            <link fetchPriority="high" href="/public/main.css" rel="stylesheet" />
           </head>
           <body>
             <StrictMode>
