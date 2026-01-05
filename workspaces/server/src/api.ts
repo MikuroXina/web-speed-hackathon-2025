@@ -31,7 +31,9 @@ export async function registerApi(app: FastifyInstance): Promise<void> {
   await app.register(fastifyCookie);
   await app.register(fastifySession, {
     cookie: {
-      path: '/',
+      httpOnly: true,
+      sameSite: 'strict',
+      secure: 'auto',
     },
     cookieName: 'wsh-2025-session',
     secret: randomBytes(32).toString('base64'),
@@ -625,7 +627,7 @@ export async function registerApi(app: FastifyInstance): Promise<void> {
       if (!userId) {
         return reply.code(401).send();
       }
-      req.session.set('id', void 0);
+      await req.session.destroy();
       return reply.code(200).send();
     },
   });
