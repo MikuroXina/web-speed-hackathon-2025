@@ -41,6 +41,8 @@ export const EpisodePage = () => {
 
   return (
     <>
+      <link as="fetch" href={`/streams/${episode.id}/playlist.m3u8`} rel="preload" />
+      <link as="fetch" href={`/streams/${episode.streamId}/000.ts`} rel="preload" />
       <title>{`${episode.title} - ${episode.series.title} - AremaTV`}</title>
 
       <div className="px-[24px] py-[48px]">
