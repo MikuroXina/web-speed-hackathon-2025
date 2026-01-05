@@ -23,7 +23,7 @@ export const ProgramDetailDialog = ({ isOpen, program }: Props): ReactElement =>
 
   return (
     <Dialog isOpen={isOpen} onClose={onClose}>
-      <div className="h-75vh size-full overflow-auto">
+      <div className="size-full h-[75vh] overflow-auto">
         <h2 className="mb-[24px] text-center text-[24px] font-bold">番組詳細</h2>
 
         <p className="mb-[8px] text-[14px] font-bold text-[#ffffff]">{program.title}</p>
