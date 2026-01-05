@@ -15,7 +15,6 @@ interface EpisodeActions {
   fetchEpisodeById: (params: {
     episodeId: EpisodeId;
   }) => Promise<StandardSchemaV1.InferOutput<typeof schema.getEpisodeByIdResponse> | null>;
-  fetchEpisodes: () => Promise<StandardSchemaV1.InferOutput<typeof schema.getEpisodesResponse>>;
 }
 
 export const createEpisodeStoreSlice = () => {
@@ -31,17 +30,6 @@ export const createEpisodeStoreSlice = () => {
         });
       }
       return episode;
-    },
-    fetchEpisodes: async () => {
-      const episodes = await episodeService.fetchEpisodes();
-      set((state) => {
-        return produce(state, (draft) => {
-          for (const episode of episodes) {
-            draft.episodes[episode.id] = episode;
-          }
-        });
-      });
-      return episodes;
     },
   }));
 };

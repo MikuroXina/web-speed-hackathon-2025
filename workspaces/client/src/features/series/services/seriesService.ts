@@ -3,11 +3,8 @@ import type { StandardSchemaV1 } from '@standard-schema/spec';
 import * as schema from '@wsh-2025/schema/src/api/schema';
 import * as batshit from '@yornaath/batshit';
 
-import { schedulePlugin } from '@wsh-2025/client/src/features/requests/schedulePlugin';
-
 const $fetch = createFetch({
   baseURL: process.env['API_BASE_URL'] ?? '/api',
-  plugins: [schedulePlugin],
   schema: createSchema({
     '/series': {
       output: schema.getSeriesResponse,
@@ -39,17 +36,12 @@ const batcher = batshit.create({
 });
 
 interface SeriesService {
-  fetchSeries: () => Promise<StandardSchemaV1.InferOutput<typeof schema.getSeriesResponse>>;
   fetchSeriesById: (params: {
     seriesId: string;
   }) => Promise<StandardSchemaV1.InferOutput<typeof schema.getSeriesByIdResponse>>;
 }
 
 export const seriesService: SeriesService = {
-  async fetchSeries() {
-    const data = await $fetch('/series', { query: {} });
-    return data;
-  },
   async fetchSeriesById({ seriesId }) {
     const data = await batcher.fetch({ seriesId });
     return data;

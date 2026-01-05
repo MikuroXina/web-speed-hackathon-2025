@@ -15,7 +15,6 @@ interface ProgramActions {
   fetchProgramById: (params: {
     programId: ProgramId;
   }) => Promise<StandardSchemaV1.InferOutput<typeof schema.getProgramByIdResponse>>;
-  fetchPrograms: () => Promise<StandardSchemaV1.InferOutput<typeof schema.getProgramsResponse>>;
 }
 
 export const createProgramStoreSlice = () => {
@@ -28,17 +27,6 @@ export const createProgramStoreSlice = () => {
         });
       });
       return program;
-    },
-    fetchPrograms: async () => {
-      const programs = await programService.fetchPrograms();
-      set((state) => {
-        return produce(state, (draft) => {
-          for (const program of programs) {
-            draft.programs[program.id] = program;
-          }
-        });
-      });
-      return programs;
     },
     programs: {},
   }));
