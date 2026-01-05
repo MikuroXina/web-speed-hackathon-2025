@@ -44,7 +44,7 @@ export const JumbotronSection = ({ module }: Props) => {
                   loop
                   className="size-full"
                   playerRef={playerRef}
-                  playerType={PlayerType.ShakaPlayer}
+                  playerType={PlayerType.HlsJS}
                   playlistUrl={`/streams/episode/${episode.id}/playlist.m3u8`}
                 />
               </div>
