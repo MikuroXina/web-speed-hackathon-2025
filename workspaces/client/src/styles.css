@@ -11,7 +11,7 @@
 }
 html,
 :host {
-  font-family: 'Hiragino Kaku Gothic ProN' !important;
+  font-family: 'Noto Sans JP', sans-serif !important;
 }
 video {
   max-height: 100%;
