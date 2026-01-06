@@ -17,7 +17,7 @@ export const SeriesItem = ({ series }: Props) => {
             <div className="relative overflow-hidden rounded-[8px] border-[2px] border-solid border-[#FFFFFF1F]">
               <img
                 alt=""
-                className="h-auto w-full"
+                className="aspect-video h-auto w-full"
                 decoding="async"
                 height={3456}
                 loading="lazy"

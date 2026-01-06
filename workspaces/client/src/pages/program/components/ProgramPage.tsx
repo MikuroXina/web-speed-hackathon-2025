@@ -98,7 +98,7 @@ export const ProgramPage = () => {
             <div className="relative size-full">
               <img
                 alt=""
-                className="h-auto w-full"
+                className="aspect-video h-auto w-full"
                 decoding="async"
                 height={3456}
                 loading="lazy"
@@ -132,7 +132,7 @@ export const ProgramPage = () => {
             <div className="relative size-full">
               <img
                 alt=""
-                className="h-auto w-full"
+                className="aspect-video h-auto w-full"
                 decoding="async"
                 height={3456}
                 loading="lazy"

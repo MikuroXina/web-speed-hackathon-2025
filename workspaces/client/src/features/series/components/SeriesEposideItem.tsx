@@ -27,7 +27,7 @@ export const SeriesEpisodeItem = ({ episode, selected }: Props) => {
             >
               <img
                 alt=""
-                className="h-auto w-[192px]"
+                className="aspect-video h-auto w-[192px]"
                 decoding="async"
                 height={3456}
                 loading="lazy"

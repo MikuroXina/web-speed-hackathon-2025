@@ -24,7 +24,7 @@ export const EpisodeItem = ({ episode }: Props) => {
             >
               <img
                 alt=""
-                className="h-auto w-full"
+                className="aspect-video h-auto w-full"
                 decoding="async"
                 height={3456}
                 src={episode.thumbnailUrl}
