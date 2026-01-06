@@ -40,8 +40,6 @@ export const EpisodePage = () => {
 
   return (
     <>
-      <link as="fetch" href={`/streams/${episode.id}/playlist.m3u8`} rel="preload" />
-      <link as="fetch" href={`/streams/${episode.streamId}/000.ts`} rel="preload" />
       <title>{`${episode.title} - ${episode.series.title} - AremaTV`}</title>
 
       <div className="px-[24px] py-[48px]">
@@ -75,28 +73,33 @@ export const EpisodePage = () => {
               </div>
             </div>
           ) : (
-            <Suspense
-              fallback={
-                <div className="grid aspect-9/16 size-full">
-                  <img alt="" className="size-full place-self-stretch [grid-area:1/-1]" src={episode.thumbnailUrl} />
-                  <div className="size-full place-self-stretch bg-[#00000077] [grid-area:1/-1]" />
-                  <div className="icon-[line-md--loading-twotone-loop] size-[48px] place-self-center text-[#ffffff] [grid-area:1/-1]" />
-                </div>
-              }
-            >
-              <div className="relative size-full">
-                <Player
-                  className="size-full"
-                  playerRef={playerRef}
-                  playerType={PlayerType.HlsJS}
-                  playlistUrl={`/streams/episode/${episode.id}/playlist.m3u8`}
-                />
+            <>
+              <link as="fetch" href={`/streams/${episode.id}/playlist.m3u8`} rel="preload" />
+              <link as="fetch" href={`/streams/${episode.streamId}/000.ts`} rel="preload" />
 
-                <div className="absolute inset-x-0 bottom-0">
-                  <PlayerController episode={episode} />
+              <Suspense
+                fallback={
+                  <div className="grid aspect-9/16 size-full">
+                    <img alt="" className="size-full place-self-stretch [grid-area:1/-1]" src={episode.thumbnailUrl} />
+                    <div className="size-full place-self-stretch bg-[#00000077] [grid-area:1/-1]" />
+                    <div className="icon-[line-md--loading-twotone-loop] size-[48px] place-self-center text-[#ffffff] [grid-area:1/-1]" />
+                  </div>
+                }
+              >
+                <div className="relative size-full">
+                  <Player
+                    className="size-full"
+                    playerRef={playerRef}
+                    playerType={PlayerType.HlsJS}
+                    playlistUrl={`/streams/episode/${episode.id}/playlist.m3u8`}
+                  />
+
+                  <div className="absolute inset-x-0 bottom-0">
+                    <PlayerController episode={episode} />
+                  </div>
                 </div>
-              </div>
-            </Suspense>
+              </Suspense>
+            </>
           )}
         </div>
 
