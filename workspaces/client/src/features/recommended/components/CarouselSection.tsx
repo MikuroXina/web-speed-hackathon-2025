@@ -17,7 +17,7 @@ export const CarouselSection = ({ module }: Props) => {
         <h2 className="mb-[16px] w-full text-[22px] font-bold">{module.title}</h2>
         <div
           key={module.id}
-          className="relative mx-[-24px] grid snap-x snap-mandatory scroll-p-[24px] auto-cols-[minmax(276px,1fr)] grid-flow-col gap-x-[12px] overflow-x-auto overflow-y-hidden pr-[56px] pl-[24px]"
+          className="relative mx-[-24px] grid snap-x snap-mandatory scroll-p-[24px] auto-cols-[minmax(320px,1fr)] grid-flow-col gap-x-[12px] overflow-x-auto overflow-y-hidden pr-[56px] pl-[24px]"
           data-scroll-restore={`carousel-${module.id}`}
         >
           {module.items.map((item) => (
