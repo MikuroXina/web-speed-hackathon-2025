@@ -55,22 +55,21 @@ export const ProgramPage = () => {
 
     // 放送前であれば、放送開始になるまで画面を更新し続ける
     if (!isBroadcastStarted) {
-      let timeout = setTimeout(function tick() {
+      const interval = setInterval(function tick() {
         forceUpdate();
-        timeout = setTimeout(tick, 250);
-      }, 250);
+      }, 5 * 1000);
       return () => {
-        clearTimeout(timeout);
+        clearInterval(interval);
       };
     }
 
     // 放送中に次の番組が始まったら、画面をそのままにしつつ、情報を次の番組にする
-    let timeout = setTimeout(function tick() {
+    const interval = setInterval(function tick() {
       if (DateTime.now() < DateTime.fromISO(program.endAt)) {
-        timeout = setTimeout(tick, 250);
         return;
       }
 
+      clearInterval(interval);
       if (nextProgram?.id) {
         void navigate(`/programs/${nextProgram.id}`, {
           preventScrollReset: true,
@@ -81,9 +80,9 @@ export const ProgramPage = () => {
         isArchivedRef.current = true;
         forceUpdate();
       }
-    }, 250);
+    }, 5 * 1000);
     return () => {
-      clearTimeout(timeout);
+      clearInterval(interval);
     };
   }, [isBroadcastStarted, nextProgram?.id]);
 
