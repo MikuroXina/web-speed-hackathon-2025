@@ -27,7 +27,6 @@ export const Layout = ({ children }: Props) => {
   const user = useAuthUser();
 
   const [scrollTopOffset, setScrollTopOffset] = useState(0);
-  const [shouldHeaderBeTransparent, setShouldHeaderBeTransparent] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -41,10 +40,7 @@ export const Layout = ({ children }: Props) => {
     };
   }, []);
 
-  useEffect(() => {
-    setShouldHeaderBeTransparent(scrollTopOffset > 80);
-  }, [scrollTopOffset]);
-
+  const shouldHeaderBeTransparent = scrollTopOffset > 80;
   const isSignedIn = user != null;
 
   return (
