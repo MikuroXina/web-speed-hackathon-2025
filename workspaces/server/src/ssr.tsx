@@ -7,6 +7,7 @@ import { createRoutes } from '@wsh-2025/client/src/app/createRoutes';
 import { createStore } from '@wsh-2025/client/src/app/createStore';
 import type { FastifyInstance } from 'fastify';
 import { createStandardRequest } from 'fastify-standard-request-reply';
+import htmlescape from 'htmlescape';
 import { Minipass } from 'minipass';
 import { StrictMode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
@@ -44,19 +45,15 @@ export function registerSsr(app: FastifyInstance): void {
     const stream = await new Promise<Minipass>((resolve, reject) => {
       const duplex = new Minipass();
       const pipeable = renderToPipeableStream(
-        <html lang="ja">
-          <head>
-            <link fetchPriority="high" href="/public/main.css" rel="stylesheet" />
-          </head>
-          <body>
-            <StrictMode>
-              <StoreProvider createStore={() => store}>
-                <StaticRouterProvider context={context} router={router} />
-              </StoreProvider>
-            </StrictMode>
-            <script>{`window.__zustandHydrationData = JSON.parse("${JSON.stringify(store)}");`}</script>
-          </body>
-        </html>,
+        <>
+          <link fetchPriority="high" href="/public/main.css" rel="stylesheet" />
+          <StrictMode>
+            <StoreProvider createStore={() => store}>
+              <StaticRouterProvider context={context} router={router} />
+            </StoreProvider>
+          </StrictMode>
+          <script>{`window.__zustandHydrationData = ${htmlescape(store.getState())};`}</script>
+        </>,
         {
           bootstrapScripts: ['/public/main.js'],
           onShellError(error) {
