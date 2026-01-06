@@ -29,7 +29,7 @@ export const SeriesPage = () => {
         <header className="mb-[24px] flex w-full flex-row items-start justify-between gap-[24px]">
           <img
             alt=""
-            className="aspect-video h-auto w-[400px] shrink-0 grow-0 rounded-[8px] border-[2px] border-solid border-[#FFFFFF1F]"
+            className="h-auto w-[400px] shrink-0 grow-0 rounded-[8px] border-[2px] border-solid border-[#FFFFFF1F]"
             decoding="async"
             height={3456}
             loading="lazy"
