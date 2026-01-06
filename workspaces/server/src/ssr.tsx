@@ -54,7 +54,7 @@ export function registerSsr(app: FastifyInstance): void {
                 <StaticRouterProvider context={context} router={router} />
               </StoreProvider>
             </StrictMode>
-            <script>{`window.__zustandHydrationData = JSON.parse(${JSON.stringify(store)});`}</script>
+            <script>{`window.__zustandHydrationData = JSON.parse("${JSON.stringify(store)}");`}</script>
           </body>
         </html>,
         {
