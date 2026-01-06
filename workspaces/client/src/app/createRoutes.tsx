@@ -85,6 +85,7 @@ export function createRoutes(store: ReturnType<typeof createStore>): RouteObject
         },
       ],
       Component: Document,
+      hydrateFallbackElement: <></>,
       async loader() {
         return await prefetch(store);
       },
