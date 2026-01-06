@@ -1,4 +1,3 @@
-import { Flipped } from 'react-flip-toolkit';
 import { NavLink } from 'react-router';
 
 interface Props {
@@ -16,17 +15,16 @@ export const SeriesItem = ({ series }: Props) => {
         return (
           <>
             <div className="relative overflow-hidden rounded-[8px] border-[2px] border-solid border-[#FFFFFF1F]">
-              <Flipped stagger flipId={isTransitioning ? `series-${series.id}` : 0}>
-                <img
-                  alt=""
-                  className="h-auto w-full"
-                  decoding="async"
-                  height={3456}
-                  loading="lazy"
-                  src={series.thumbnailUrl}
-                  width={6144}
-                />
-              </Flipped>
+              <img
+                alt=""
+                className="h-auto w-full"
+                decoding="async"
+                height={3456}
+                loading="lazy"
+                src={series.thumbnailUrl}
+                style={{ viewTransitionName: isTransitioning ? `series-${series.id}` : undefined }}
+                width={6144}
+              />
             </div>
             <div className="p-[8px]">
               <div className="line-clamp-2 text-[14px] font-bold text-[#ffffff]">{series.title}</div>

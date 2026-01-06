@@ -1,4 +1,3 @@
-import { Flipped } from 'react-flip-toolkit';
 import { type Params, useLoaderData, useParams } from 'react-router';
 import invariant from 'tiny-invariant';
 
@@ -28,17 +27,16 @@ export const SeriesPage = () => {
 
       <div className="m-auto px-[24px] py-[48px]">
         <header className="mb-[24px] flex w-full flex-row items-start justify-between gap-[24px]">
-          <Flipped stagger flipId={`series-${series.id}`}>
-            <img
-              alt=""
-              className="h-auto w-[400px] shrink-0 grow-0 rounded-[8px] border-[2px] border-solid border-[#FFFFFF1F]"
-              decoding="async"
-              height={3456}
-              loading="lazy"
-              src={series.thumbnailUrl}
-              width={6144}
-            />
-          </Flipped>
+          <img
+            alt=""
+            className="h-auto w-[400px] shrink-0 grow-0 rounded-[8px] border-[2px] border-solid border-[#FFFFFF1F]"
+            decoding="async"
+            height={3456}
+            loading="lazy"
+            src={series.thumbnailUrl}
+            style={{ viewTransitionName: `series-${series.id}` }}
+            width={6144}
+          />
           <div className="shrink-1 grow-1 overflow-hidden">
             <h1 className="mb-[16px] line-clamp-2 text-[32px] font-bold text-[#ffffff]">{series.title}</h1>
             <div className="line-clamp-3 text-[14px] text-[#999999]">{series.description}</div>

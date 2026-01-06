@@ -1,7 +1,6 @@
 import type { StandardSchemaV1 } from '@standard-schema/spec';
 import * as schema from '@wsh-2025/schema/src/api/schema';
 import { useRef } from 'react';
-import { Flipped } from 'react-flip-toolkit';
 import { NavLink } from 'react-router';
 import invariant from 'tiny-invariant';
 import type { ArrayValues } from 'type-fest';
@@ -38,17 +37,18 @@ export const JumbotronSection = ({ module }: Props) => {
               </div>
             </div>
 
-            <Flipped stagger flipId={isTransitioning ? `episode-${episode.id}` : 0}>
-              <div className="h-full w-auto shrink-0 grow-0">
-                <Player
-                  loop
-                  className="size-full"
-                  playerRef={playerRef}
-                  playerType={PlayerType.HlsJS}
-                  playlistUrl={`/streams/episode/${episode.id}/playlist.m3u8`}
-                />
-              </div>
-            </Flipped>
+            <div
+              className="h-full w-auto shrink-0 grow-0"
+              style={{ viewTransitionName: isTransitioning ? `episode-${episode.id}` : undefined }}
+            >
+              <Player
+                loop
+                className="size-full"
+                playerRef={playerRef}
+                playerType={PlayerType.HlsJS}
+                playlistUrl={`/streams/episode/${episode.id}/playlist.m3u8`}
+              />
+            </div>
           </>
         );
       }}
