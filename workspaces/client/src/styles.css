@@ -13,27 +13,9 @@ html,
 :host {
   font-family: 'Noto Sans JP', sans-serif !important;
 }
-html,
-body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-}
 video {
   max-height: 100%;
   max-width: 100%;
-}
-:root {
-  background-color: black;
-  color: white;
-}
-*,
-::after,
-::before,
-::backdrop,
-::file-selector-button {
-  border-style: none;
-  text-decoration-line: none;
 }
 
 @keyframes fade-in {
