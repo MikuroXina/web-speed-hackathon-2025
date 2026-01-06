@@ -64,5 +64,6 @@ export async function scrollEntire(page: Page): Promise<void> {
       window.scrollTo(0, i);
       await delay(50);
     }
+    window.scrollTo(0, 0);
   });
 }
