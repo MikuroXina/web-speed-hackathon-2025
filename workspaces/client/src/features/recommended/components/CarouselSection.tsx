@@ -17,13 +17,11 @@ export const CarouselSection = ({ module }: Props) => {
         <h2 className="mb-[16px] w-full text-[22px] font-bold">{module.title}</h2>
         <div
           key={module.id}
-          className={
-            'relative mx-[-24px] grid auto-cols-[minmax(276px,1fr)] grid-flow-col gap-x-[12px] overflow-x-auto overflow-y-hidden pr-[56px] pl-[24px]'
-          }
+          className="relative mx-[-24px] grid snap-x snap-mandatory scroll-p-[24px] auto-cols-[minmax(276px,1fr)] grid-flow-col gap-x-[12px] overflow-x-auto overflow-y-hidden pr-[56px] pl-[24px]"
           data-scroll-restore={`carousel-${module.id}`}
         >
           {module.items.map((item) => (
-            <div key={item.id} className="shrink-0 grow-0">
+            <div key={item.id} className="shrink-0 grow-0 snap-start">
               {item.series != null ? <SeriesItem series={item.series} /> : null}
               {item.episode != null ? <EpisodeItem episode={item.episode} /> : null}
             </div>
