@@ -31,9 +31,9 @@ export const NewTimetableFeatureDialog = ({ isOpen }: Props) => {
         <img
           alt=""
           className="mb-[24px] w-full"
-          decoding="async"
-          height={228}
-          loading="lazy"
+          fetchPriority="high"
+          height={288}
+          loading="eager"
           src="/public/images/timetable/feature-explain.png"
           width={513}
         />
