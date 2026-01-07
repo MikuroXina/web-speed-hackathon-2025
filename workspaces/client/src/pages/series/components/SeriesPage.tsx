@@ -24,6 +24,7 @@ export const SeriesPage = () => {
   return (
     <>
       <title>{`${series.title} - AremaTV`}</title>
+      <link as="img" fetchPriority="high" href={series.thumbnailUrl} rel="preload" />
 
       <div className="m-auto px-[24px] py-[48px]">
         <header className="mb-[24px] flex w-full flex-row items-start justify-between gap-[24px]">
@@ -31,8 +32,9 @@ export const SeriesPage = () => {
             alt=""
             className="h-auto w-[400px] shrink-0 grow-0 rounded-[8px] border-[2px] border-solid border-[#FFFFFF1F]"
             decoding="async"
+            fetchPriority="high"
             height={3456}
-            loading="lazy"
+            loading="eager"
             src={series.thumbnailUrl}
             style={{ viewTransitionName: `series-${series.id}` }}
             width={6144}
