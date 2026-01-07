@@ -1,7 +1,9 @@
+import { Suspense } from 'react';
 import { Outlet, ScrollRestoration } from 'react-router';
 
 import { createStore } from '@wsh-2025/client/src/app/createStore';
 import { Layout } from '@wsh-2025/client/src/features/layout/components/Layout';
+import { Loading } from '@wsh-2025/client/src/features/layout/components/Loading';
 
 export const prefetch = async (store: ReturnType<typeof createStore>) => {
   const user = await store.getState().features.auth.fetchUser();
@@ -18,11 +20,13 @@ export const Document = () => {
       <body className="size-full bg-[#000000] text-[#ffffff]">
         <div className="__root__">
           <Layout>
-            <Outlet />
+            <Suspense fallback={<Loading />}>
+              <Outlet />
+            </Suspense>
           </Layout>
         </div>
         <ScrollRestoration />
-        <script async defer src="/public/main.js"></script>
+        <script async src="/public/main.js"></script>
       </body>
     </html>
   );
