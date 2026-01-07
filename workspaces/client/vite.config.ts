@@ -20,6 +20,10 @@ export default defineConfig({
         chunkFileNames: 'chunk-[hash].js',
         dir: 'dist',
         entryFileNames: 'main.js',
+        manualChunks: {
+          mock: ['luxon'],
+          validator: ['@sinclair/typebox', '@sinclair/typemap', 'zod', 'valibot', 'drizzle-orm'],
+        },
       },
     },
     sourcemap: true,
