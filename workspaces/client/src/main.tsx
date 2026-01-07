@@ -15,26 +15,18 @@ declare global {
   var __staticRouterHydrationData: HydrationState;
 }
 
-function main() {
-  const store = createStore({
-    hydrationData: window.__zustandHydrationData,
-  });
-  const router = createBrowserRouter(createRoutes(store), {
-    hydrationData: window.__staticRouterHydrationData,
-  });
+const store = createStore({
+  hydrationData: window.__zustandHydrationData,
+});
+const router = createBrowserRouter(createRoutes(store), {
+  hydrationData: window.__staticRouterHydrationData,
+});
 
-  hydrateRoot(
-    document,
-    <StrictMode>
-      <StoreProvider createStore={() => store}>
-        <RouterProvider router={router} />
-      </StoreProvider>
-    </StrictMode>,
-  );
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', main);
-} else {
-  main();
-}
+hydrateRoot(
+  document,
+  <StrictMode>
+    <StoreProvider createStore={() => store}>
+      <RouterProvider router={router} />
+    </StoreProvider>
+  </StrictMode>,
+);
