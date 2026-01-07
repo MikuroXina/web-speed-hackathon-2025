@@ -34,14 +34,9 @@ export const Program = ({ height, program }: Props): ReactElement => {
 
   const [shouldImageBeVisible, setShouldImageBeVisible] = useState<boolean>(false);
   useEffect(() => {
-    const interval = setInterval(() => {
-      const imageHeight = imageRef.current?.clientHeight ?? 0;
-      const titleHeight = titleRef.current?.clientHeight ?? 0;
-      setShouldImageBeVisible(imageHeight <= height - titleHeight);
-    }, 250);
-    return () => {
-      clearInterval(interval);
-    };
+    const imageHeight = imageRef.current?.clientHeight ?? 0;
+    const titleHeight = titleRef.current?.clientHeight ?? 0;
+    setShouldImageBeVisible(imageHeight <= height - titleHeight);
   }, [height]);
 
   return (
