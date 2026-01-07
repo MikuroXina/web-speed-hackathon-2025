@@ -55,7 +55,7 @@ export function registerSsr(app: FastifyInstance): void {
           <script>{`window.__zustandHydrationData = ${htmlescape(store.getState())};`}</script>
         </>,
         {
-          bootstrapScripts: ['/public/main.js'],
+          bootstrapModules: ['/public/main.js'],
           onShellError(error) {
             clearTimeout(abortTimer);
             reject(new Error('renderToPipeableStream occurred shell error', { cause: error }));

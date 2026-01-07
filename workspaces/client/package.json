@@ -4,11 +4,11 @@
   "scripts": {
     "analyze": "wireit",
     "build": "wireit",
+    "dev": "wireit",
     "format": "wireit",
     "format:eslint": "wireit",
     "format:prettier": "wireit",
-    "typecheck": "wireit",
-    "watch": "wireit"
+    "typecheck": "wireit"
   },
   "dependencies": {
     "@babel/runtime": "7.26.10",
@@ -50,12 +50,14 @@
     "@iconify/types": "2.0.0",
     "@tailwindcss/cli": "4.1.18",
     "@tailwindcss/postcss": "4.1.18",
+    "@tailwindcss/vite": "4.1.18",
     "@types/lodash": "4.17.16",
     "@types/luxon": "3.4.2",
     "@types/m3u8-parser": "7.2.0",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
     "@types/wicg-task-scheduling": "2024.1.0",
+    "@vitejs/plugin-react-swc": "4.2.2",
     "@wsh-2025/configs": "workspace:*",
     "arraybuffer-loader": "1.0.8",
     "autoprefixer": "10.4.23",
@@ -67,6 +69,7 @@
     "postcss-loader": "8.2.0",
     "tailwindcss": "4.1.18",
     "typescript": "5.7.2",
+    "vite": "7.3.1",
     "webpack": "5.96.1",
     "webpack-bundle-analyzer": "4.10.2",
     "webpack-cli": "5.1.4",
@@ -74,23 +77,22 @@
     "wireit": "0.14.9"
   },
   "wireit": {
-    "watch": {
-      "command": "webpack --watch --mode development",
+    "dev": {
+      "command": "vite build --mode development .",
       "files": [
         "../../pnpm-lock.yaml",
         "../schema/src/**/*",
         "./src/**/*",
-        "./webpack.config.mjs"
-      ],
-      "service": true
+        "./vite.config.ts"
+      ]
     },
     "build": {
-      "command": "webpack --mode production",
+      "command": "vite build --mode production .",
       "files": [
         "../../pnpm-lock.yaml",
         "../schema/src/**/*",
         "./src/**/*",
-        "./webpack.config.mjs"
+        "./vite.config.ts"
       ],
       "output": [
         "./dist/**/*"
@@ -100,13 +102,7 @@
       }
     },
     "analyze": {
-      "command": "webpack-dev-server --analyze",
-      "files": [
-        "../../pnpm-lock.yaml",
-        "../schema/src/**/*",
-        "./src/**/*",
-        "./webpack.config.mjs"
-      ],
+      "command": "VITE_ANALYZE=true vite build --mode development .",
       "service": true
     },
     "format": {
