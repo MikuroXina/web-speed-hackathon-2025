@@ -74,9 +74,6 @@ export const EpisodePage = () => {
             </div>
           ) : (
             <>
-              <link as="fetch" href={`/streams/${episode.id}/playlist.m3u8`} rel="preload" />
-              <link as="fetch" href={`/streams/${episode.streamId}/000.ts`} rel="preload" />
-
               <Suspense
                 fallback={
                   <div className="grid aspect-9/16 size-full">
