@@ -28,7 +28,7 @@ export const NewTimetableFeatureDialog = ({ isOpen }: Props) => {
           引き続き皆様に快適にご利用いただけるよう、サービスの改善に努めてまいります。今後ともどうぞよろしくお願いいたします。
         </p>
 
-        <link as="img" fetchPriority="high" href="/public/images/timetable/feature-explain.png" rel="preload" />
+        <link as="img" fetchPriority="high" href="/public/images/timetable/feature-explain.avif" rel="preload" />
         <img
           alt=""
           className="mb-[24px] w-full"
@@ -36,7 +36,7 @@ export const NewTimetableFeatureDialog = ({ isOpen }: Props) => {
           fetchPriority="high"
           height={288}
           loading="eager"
-          src="/public/images/timetable/feature-explain.png"
+          src="/public/images/timetable/feature-explain.avif"
           width={513}
         />
 
