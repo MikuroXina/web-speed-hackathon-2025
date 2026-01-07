@@ -1,4 +1,4 @@
-import { type Ref, useEffect, useRef } from 'react';
+import { type Ref, useLayoutEffect, useRef } from 'react';
 import invariant from 'tiny-invariant';
 import { assignRef } from 'use-callback-ref';
 
@@ -16,7 +16,7 @@ interface Props {
 export const Player = ({ className, loop, playerRef, playerType, playlistUrl }: Props) => {
   const mountRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mountElement = mountRef.current;
     invariant(mountElement);
 
@@ -30,6 +30,8 @@ export const Player = ({ className, loop, playerRef, playerType, playlistUrl }: 
         }
         player = createPlayer(playerType);
         player.load(playlistUrl, { loop: loop ?? false });
+        player.videoElement.width = 1920;
+        player.videoElement.height = 1080;
         mountElement.appendChild(player.videoElement);
         assignRef(playerRef, player);
       },
@@ -48,7 +50,7 @@ export const Player = ({ className, loop, playerRef, playerType, playlistUrl }: 
   return (
     <div className={className}>
       <div className="relative size-full">
-        <div ref={mountRef} className="size-full" />
+        <div ref={mountRef} className="aspect-video size-full object-contain" />
 
         <div className="absolute inset-0 z-[-10] grid place-content-center">
           <div className="icon-[line-md--loading-twotone-loop] size-[48px] text-[#ffffff]" />
