@@ -9,7 +9,6 @@ import type { FastifyInstance } from 'fastify';
 import { createStandardRequest } from 'fastify-standard-request-reply';
 import htmlescape from 'htmlescape';
 import { Minipass } from 'minipass';
-import { StrictMode } from 'react';
 import { renderToPipeableStream } from 'react-dom/server';
 import { createStaticHandler, createStaticRouter, StaticRouterProvider } from 'react-router';
 
@@ -47,11 +46,9 @@ export function registerSsr(app: FastifyInstance): void {
       const pipeable = renderToPipeableStream(
         <>
           <link fetchPriority="high" href="/public/main.css" rel="stylesheet" />
-          <StrictMode>
-            <StoreProvider createStore={() => store}>
-              <StaticRouterProvider context={context} router={router} />
-            </StoreProvider>
-          </StrictMode>
+          <StoreProvider createStore={() => store}>
+            <StaticRouterProvider context={context} router={router} />
+          </StoreProvider>
           <script>{`window.__zustandHydrationData = ${htmlescape(store.getState())};`}</script>
         </>,
         {
