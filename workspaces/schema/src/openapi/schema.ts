@@ -179,14 +179,51 @@ export const getRecommendedModulesRequestParams = z.object({
   referenceId: z.string(),
 });
 export const getRecommendedModulesResponse = z.array(
-  recommendedModule.extend({
-    items: z.array(
-      recommendedItem.extend({
-        series: series.nullable(),
-        episode: episode.extend({ series }).nullable(),
+  z.discriminatedUnion('type', [
+    recommendedModule
+      .pick({
+        id: true,
+        title: true,
+      })
+      .extend({
+        type: z.literal('carousel'),
+        items: z.array(
+          recommendedItem.pick({ id: true }).extend({
+            series: series.pick({ id: true, title: true, thumbnailUrl: true }).nullable(),
+            episode: episode
+              .pick({ id: true, title: true, thumbnailUrl: true, premium: true })
+              .extend({
+                series: series.pick({
+                  title: true,
+                }),
+              })
+              .nullable(),
+          }),
+        ),
       }),
-    ),
-  }),
+    recommendedModule
+      .pick({
+        id: true,
+        title: true,
+      })
+      .extend({
+        type: z.literal('jumbotron'),
+        items: z.array(
+          recommendedItem.pick({ id: true }).extend({
+            series: series.pick({ id: true, title: true, thumbnailUrl: true }).nullable(),
+            episode: episode
+              .pick({ id: true, title: true, thumbnailUrl: true, premium: true })
+              .extend({
+                description: z.string(),
+                series: series.pick({
+                  title: true,
+                }),
+              })
+              .nullable(),
+          }),
+        ),
+      }),
+  ]),
 );
 
 // POST /signIn

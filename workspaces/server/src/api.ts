@@ -478,22 +478,57 @@ export async function registerApi(app: FastifyInstance): Promise<void> {
         where(module, { eq }) {
           return eq(module.referenceId, req.params.referenceId);
         },
+        columns: {
+          id: true,
+          title: true,
+          type: true,
+        },
         with: {
           items: {
             orderBy(item, { asc }) {
               return asc(item.order);
             },
+            columns: {
+              id: true,
+            },
             with: {
-              series: true,
+              series: {
+                columns: {
+                  id: true,
+                  title: true,
+                  thumbnailUrl: true,
+                },
+              },
               episode: {
+                columns: {
+                  id: true,
+                  premium: true,
+                  title: true,
+                  thumbnailUrl: true,
+                  description: true,
+                },
                 with: {
-                  series: true,
+                  series: {
+                    columns: {
+                      title: true,
+                    },
+                  },
                 },
               },
             },
           },
         },
       });
+      for (const module of modules) {
+        if (module.type === 'carousel') {
+          for (const item of module.items) {
+            if (item.episode != null) {
+              // @ts-expect-error ...........
+              delete item.episode['description'];
+            }
+          }
+        }
+      }
       return reply.code(200).send(modules);
     },
   });
