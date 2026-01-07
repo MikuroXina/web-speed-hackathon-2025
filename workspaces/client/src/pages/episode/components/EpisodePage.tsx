@@ -115,7 +115,7 @@ export const EpisodePage = () => {
 
         {modules[0] != null ? (
           <div className="mt-[24px]">
-            <RecommendedSection module={modules[0]} />
+            <RecommendedSection eager module={modules[0]} />
           </div>
         ) : null}
 

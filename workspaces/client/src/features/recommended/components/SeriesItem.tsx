@@ -1,6 +1,7 @@
 import { NavLink } from 'react-router';
 
 interface Props {
+  eager: boolean;
   series: {
     id: string;
     thumbnailUrl: string;
@@ -8,7 +9,7 @@ interface Props {
   };
 }
 
-export const SeriesItem = ({ series }: Props) => {
+export const SeriesItem = ({ eager, series }: Props) => {
   return (
     <NavLink viewTransition className="block w-full overflow-hidden hover:opacity-75" to={`/series/${series.id}`}>
       {({ isTransitioning }) => {
@@ -19,8 +20,9 @@ export const SeriesItem = ({ series }: Props) => {
                 alt=""
                 className="aspect-video h-auto w-full"
                 decoding="async"
+                fetchPriority={eager ? 'high' : 'auto'}
                 height={3456}
-                loading="lazy"
+                loading={eager ? 'eager' : 'lazy'}
                 src={series.thumbnailUrl}
                 style={{ viewTransitionName: isTransitioning ? `series-${series.id}` : undefined }}
                 width={6144}

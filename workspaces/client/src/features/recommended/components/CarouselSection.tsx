@@ -7,10 +7,11 @@ import { EpisodeItem } from '@wsh-2025/client/src/features/recommended/component
 import { SeriesItem } from '@wsh-2025/client/src/features/recommended/components/SeriesItem';
 
 interface Props {
+  eager: boolean;
   module: ArrayValues<StandardSchemaV1.InferOutput<typeof schema.getRecommendedModulesResponse>>;
 }
 
-export const CarouselSection = ({ module }: Props) => {
+export const CarouselSection = ({ eager, module }: Props) => {
   return (
     <>
       <div className="w-full">
@@ -20,10 +21,10 @@ export const CarouselSection = ({ module }: Props) => {
           className="relative mx-[-24px] grid snap-x snap-mandatory scroll-p-[24px] auto-cols-[minmax(320px,1fr)] grid-flow-col gap-x-[12px] overflow-x-auto overflow-y-hidden pr-[56px] pl-[24px]"
           data-scroll-restore={`carousel-${module.id}`}
         >
-          {module.items.map((item) => (
+          {module.items.map((item, index) => (
             <div key={item.id} className="shrink-0 grow-0 snap-start">
-              {item.series != null ? <SeriesItem series={item.series} /> : null}
-              {item.episode != null ? <EpisodeItem episode={item.episode} /> : null}
+              {item.series != null ? <SeriesItem eager={eager && index === 0} series={item.series} /> : null}
+              {item.episode != null ? <EpisodeItem eager={eager && index === 0} episode={item.episode} /> : null}
             </div>
           ))}
         </div>
