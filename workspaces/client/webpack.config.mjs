@@ -7,7 +7,7 @@ import webpack from 'webpack';
 const config = {
   devtool: 'source-map',
   entry: './src/main.tsx',
-  mode: 'production',
+  mode: 'development',
   module: {
     rules: [
       {
@@ -63,7 +63,7 @@ const config = {
   },
   plugins: [
     new MiniCssExtractPlugin(),
-    new webpack.EnvironmentPlugin({ API_BASE_URL: '/api', NODE_ENV: 'production' }),
+    new webpack.EnvironmentPlugin({ API_BASE_URL: '/api', NODE_ENV: 'development' }),
   ],
   resolve: {
     extensions: ['.js', '.cjs', '.mjs', '.ts', '.cts', '.mts', '.tsx', '.jsx'],
