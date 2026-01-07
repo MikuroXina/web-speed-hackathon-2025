@@ -43,6 +43,11 @@ export const Layout = ({ children }: Props) => {
   const shouldHeaderBeTransparent = scrollTopOffset > 80;
   const isSignedIn = user != null;
 
+  const [isMounted, setIsMounted] = useState(false);
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
   return (
     <>
       <div className="grid h-auto min-h-[100vh] w-full grid-cols-[188px_minmax(0,1fr)] grid-rows-[80px_calc(100vh-80px)_minmax(0,1fr)] flex-col [grid-template-areas:'a1_b1''a2_b2''a3_b3']">
@@ -62,6 +67,7 @@ export const Layout = ({ children }: Props) => {
           <nav>
             <button
               className="block flex h-[56px] w-[188px] items-center justify-center bg-transparent pt-[8px] pr-[8px] pb-[8px] pl-[20px]"
+              disabled={!isMounted}
               type="button"
               onClick={isSignedIn ? authActions.openSignOutDialog : authActions.openSignInDialog}
             >
